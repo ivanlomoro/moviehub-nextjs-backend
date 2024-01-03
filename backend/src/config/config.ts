@@ -6,7 +6,6 @@ type TCONFIG = {
 
 type EnvironmentConfig = {
     app: AppConfig;
-    db: MongoDBConfig;
     auth0?: Auth0Config;
     cloudinary: Cloudinary;
 };
@@ -16,10 +15,6 @@ type Auth0Config = {
     audience: string | undefined;
     issuer: string | undefined;
 };
-
-type MongoDBConfig = {
-    URI: string;
-}
 
 type AppConfig = {
     PORT: string | number;
@@ -44,9 +39,6 @@ const CONFIG: TCONFIG = {
         app: {
             PORT: process.env.PORT || 4001
         },
-        db: {
-            URI: process.env.MONGO_URI_DEV || 'mongodb://localhost:27017/test_development'
-        },
         auth0: {
             client_origin: process.env.APP_ORIGIN,
             audience: process.env.AUTH0_AUDIENCE,
@@ -62,8 +54,10 @@ const CONFIG: TCONFIG = {
         app: {
             PORT: process.env.PORT || 4002
         },
-        db: {
-            URI: process.env.MONGO_URI_PROD || 'mongodb://localhost:27017/test_production'
+        auth0: {
+            client_origin: process.env.APP_ORIGIN,
+            audience: process.env.AUTH0_AUDIENCE,
+            issuer: process.env.AUTH0_ISSUER
         },
         cloudinary: {
             cloud_name: process.env.CLOUDINARY_CLOUD_NAME,

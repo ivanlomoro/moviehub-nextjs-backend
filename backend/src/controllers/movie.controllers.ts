@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
-import { prismaClient } from "../db/client";
-import { convertToType } from "../helpers/utils";
+import prismaClient from "../db/client";
 
 
 export const getAllMovies = async (req: Request, res: Response) => {
@@ -23,7 +22,7 @@ export const getAllMoviesByUserId = async (req: Request, res: Response) => {
     try {
         const movies = await prismaClient.movies.findMany({
             where: {
-                userId: convertToType(userId),
+                userId: (userId),
             },
             include: {
                 Genre: true,
@@ -59,10 +58,10 @@ export const createMovie = async (req: Request, res: Response) => {
                 score,
                 genre,
                 Genre: {
-                    connect: { id: convertToType(genreModel.id) },
+                    connect: { id: (genreModel.id) },
                 },
                 User: {
-                    connect: { id: convertToType(userId) },
+                    connect: { id: (userId) },
                 },
             },
         });
@@ -78,7 +77,7 @@ export const getMovieById = async (req: Request, res: Response) => {
     try {
         const movie = await prismaClient.movies.findUnique({
             where: {
-                id: convertToType(movieId),
+                id: (movieId),
             },
             include: {
                 Genre: true,
@@ -97,7 +96,7 @@ export const updateMovie = async (req: Request, res: Response) => {
     try {
         const movie = await prismaClient.movies.update({
             where: {
-                id: convertToType(movieId),
+                id: (movieId),
             },
             data: {
                 title,
@@ -122,7 +121,7 @@ export const deleteMovieById = async (req: Request, res: Response) => {
     try {
         const deletedMovie = await prismaClient.movies.delete({
             where: {
-                id: convertToType(movieId),
+                id: (movieId),
             },
         })
         res.status(204).send("Movie deleted: " + deletedMovie.title)

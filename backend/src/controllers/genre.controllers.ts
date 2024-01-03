@@ -1,6 +1,5 @@
 import { Response, Request } from "express";
-import { prismaClient } from "../db/client";
-import { convertToType } from "../helpers/utils";
+import prismaClient from "../db/client";
 
 export const getAllGenres = async (req: Request, res: Response) => {
     try {
@@ -22,7 +21,7 @@ export const getGenreById = async (req: Request, res: Response) => {
     try {
         const genre = await prismaClient.genre.findUnique({
             where: {
-                id: convertToType(genreId),
+                id: (genreId),
             },
             include: {
                 movies: true,
@@ -66,7 +65,7 @@ export const updateGenre = async (req: Request, res: Response) => {
     try {
         const updatedGenre = await prismaClient.genre.update({
             where: {
-                id: convertToType(genreId),
+                id: (genreId),
             },
             data: {
                 name,
@@ -88,7 +87,7 @@ export const deleteGenreById = async (req: Request, res: Response) => {
     try {
         const deletedGenre = await prismaClient.genre.delete({
             where: {
-                id: convertToType(genreId),
+                id: (genreId),
             },
         });
         res.status(204).send(deletedGenre);

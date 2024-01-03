@@ -1,6 +1,5 @@
 import { Request, Response } from "express"
-import { prismaClient } from "../db/client";
-import { convertToType } from "../helpers/utils";
+import prismaClient from "../db/client";
 
 export const getAllUsers = async (req: Request, res: Response) => {
     try {
@@ -42,19 +41,6 @@ export const createUserOrLogin = async (req: Request, res: Response) => {
     }
 };
 
-export const createUser = async (req: Request, res: Response) => {
-    const { name, email, password } = req.body;
-
-    try {
-        if (!name || !email || !password) throw new Error("Missing fields");
-
-        const newUser = await prismaClient.user.create({ data: { name, email, password } });
-
-        res.status(201).json(newUser);
-    } catch (error) {
-        res.status(500).json(error);
-    }
-}
 
 export const getUserById = async (req: Request, res: Response) => {
     const { userId } = req.params;
@@ -62,7 +48,7 @@ export const getUserById = async (req: Request, res: Response) => {
     try {
         const user = await prismaClient.user.findUnique({
             where: {
-                id: convertToType(userId)
+                id: (userId)
             },
             include: {
                 movies: true
@@ -79,7 +65,7 @@ export const updateUser = async (req: Request, res: Response) => {
     const { name, email } = req.body;
     try {
         const user = await prismaClient.user.update({
-            where: { id: convertToType(userId) },
+            where: { id: (userId) },
             data: { name, email },
         });
 
@@ -94,7 +80,7 @@ export const deleteUser = async (req: Request, res: Response) => {
 
     try {
         const user = await prismaClient.user.delete({
-            where: { id: convertToType(userId) }
+            where: { id: (userId) }
         });
         res.status(204).json(user)
     } catch (error) {
