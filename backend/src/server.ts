@@ -4,7 +4,6 @@ import movieRoutes from './routes/movie.routes';
 import genreRoutes from './routes/genre.routes';
 import { requestRouter } from './routes/requests.routes';
 import cors from 'cors'
-import errorHandler from './middleware/error.middleware';
 import fileUpload from 'express-fileupload';
 
 const app = express();
@@ -21,7 +20,6 @@ app.use("/user", userRoutes);
 app.use("/movie", movieRoutes);
 app.use("/genre", genreRoutes);
 app.use("/api", requestRouter);
-app.use(errorHandler)
 
 app.get("/", (req, res) => {
     res.status(200).json({message:"Backend api"})
