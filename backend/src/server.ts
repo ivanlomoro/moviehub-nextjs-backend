@@ -23,5 +23,9 @@ app.use("/genre", genreRoutes);
 app.use("/api", requestRouter);
 app.use(errorHandler)
 
+app.get("/", (req, res) => {
+    res.status(200).json({message:"Backend api"})
+})
+
 
 export default app
