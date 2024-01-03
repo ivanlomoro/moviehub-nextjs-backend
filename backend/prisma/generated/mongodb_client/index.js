@@ -134,7 +134,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\ivanm\\Desktop\\Assembler\\Proyects\\moviehub\\backend\\prisma\\generated\\mongodb_client",
+      "value": "C:\\Users\\ivanm\\Desktop\\Assembler\\Proyects\\moviehub-nextjs-backend\\backend\\prisma\\generated\\mongodb_client",
       "fromEnvVar": null
     },
     "config": {
